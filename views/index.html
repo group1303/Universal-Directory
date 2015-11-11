@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="UniDir">
+    <head>
+        <title>Directory</title>
+        <meta charset="utf-8" />
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script src="js/globalize.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-sanitize.min.js"></script>
+        <script src="js/angular-route.min.js"></script>
+        <script src="js/dx.all.ru.js"></script>
+        <script src="js/dx.webappjs.js"></script>
+        <script src="js/app.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/dx.common.css" />
+        <link rel="stylesheet" type="text/css" href="css/dx.light.css" />
+        <link rel="stylesheet" type="text/css" href="css/dx.css" />
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    </head>
+    <body>
+        <div ng-controller="itemsController">
+            <div dx-data-grid="dataGridOptions"></div>
+        </div>
+
+
+        <div ng-controller="myController">
+            <div dx-button="{
+                text: 'Рандом',
+                onClick: clickHandler
+            }"></div>
+            <p>Random value: {{randomValue}}</p>
+        </div>
+    </body>
+</html>
