@@ -5,7 +5,7 @@ angular.module('UniDir.content', ['ngRoute','dx'])
 .controller('contentCtrl', ['$scope','$http', 
   function($scope, $http) {
 
-$http.get('http://localhost:8080/api')
+$http.get('http://localhost:8080/classes')
 .success(function(data, status, headers, config) {
     $scope.items = data;
 })
@@ -34,20 +34,28 @@ $scope.dataGridOptions = {
   },
   columns: [
     {
-      dataField: 'SHORT_NAME',
-      caption: "SHORT_NAME",
-      width: 170
+      dataField: 'ID_CLASS',
+      caption: "ID",
+      width: 50
     },
-    'ID_CLASS',
-    'NAME', 
+    {
+      dataField: 'SHORT_NAME',
+      caption: "Короткое название",
+      width: 200
+    },
+    {
+      dataField: 'NAME', 
+      caption: "Полное название"
+    },
     {
       dataField: 'MAIN_CLASS',
-      caption: "MAIN_CLASS",
-      width: 170
-    }, {
+      caption: "Родительский класс",
+      width: 200
+    }, 
+    {
       dataField: 'BASE_EI',
-      caption: 'BASE_EI',
-      width: 90
+      caption: 'Ед. измерения',
+      width: 200
     }
   ]
 }
