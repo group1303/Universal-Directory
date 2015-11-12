@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+
+ <head>
+  <meta charset="utf-8" />
+  <title>Test App</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
+     <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.2.3/js/dx.all.js"></script>
+    <script src="test.js"></script>
+
+    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.3/css/dx.common.css" />
+    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.3/css/dx.light.css" />
+</head>
+
+  <body ng-controller=testCtrl>
+   <div dx-tree-view="{ bindingOptions: { dataSource: 'test' } }"> 
+         <div data-options="dxTemplate: { name: 'item' }">
+        <div ng-bind="Name"></div>
+        </div>
+  
+  </body>
+
+</html>

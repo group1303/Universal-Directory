@@ -1,3 +1,93 @@
+body,
+html{
+    margin: 0; 
+    padding: 0;
+    font-family: 'Helvetica Neue', 'Segoe UI', Arial sans-serif;
+    height: 100%;
+    width: 100%;
+    min-width: 1000px;
+    background-color: #e7e7e7;
+}
+
+.navigation{
+    position: relative;
+    top: 0;
+    bottom: 0;
+    float: left;
+    width: 300px;
+    min-height: 600px;
+}
+
+.navigation .logo{
+    text-align: center;
+}
+
+.navigation .left-menu{
+    margin-top: 60px;
+    margin-left: 30px;
+}
+
+.navigation .left-menu .menu-header{
+    color: #7f8082;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.navigation .nav {
+    margin-top: 20px;
+}
+
+.header{
+    width: 100%;
+    height: 50px;
+}
+
+.content{
+    overflow: hidden;
+    height: 812px;
+    background-color: #fafafa;
+    border: 1px solid #cfcfcf;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.1);
+    margin: 20px 0 20px 0;
+}
+
+.buttons{
+    position: relative;
+    display: inline-block;
+    top: 20px;
+}
+
+
+
+/*----DX----*/
+.dx-widget{
+    font-size: 18px;
+}
+
+.dx-datagrid {
+    background-color: #FAFAFA;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*-----???------*/
 .form > div {
     display: inline-block;    
 }

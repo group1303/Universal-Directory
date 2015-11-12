@@ -17,7 +17,7 @@ fb.attach(
         } else {
             database = db;
          //   return database;
-            console.log("\n\r db connected ");
+            console.log("\nСоединение с базой установленно");
         }
     }
 
@@ -105,7 +105,7 @@ module.exports = {
                     } else {
                         database = db;
                         //return database
-                       console.log("\n Соединение с базой установленно");
+                       //console.log("\n Соединение с базой установленно");
                     }
                 }
             );
@@ -130,7 +130,7 @@ module.exports = {
                     console.log("\n Соединение с базой установленно");
                     database.execute(qrystr, function (err, results, fields) {
                             //    database.execute(qrystr, function (err, results, fields) {
-                            console.log('database.query result "EI"  ', results);
+                            //console.log('database.query result "EI"  ', results);
 
                             wrapJson(results, fields, jsondata);
                         },
@@ -155,10 +155,10 @@ module.exports = {
                     } else {
                         database = db;
                         //return database
-                        console.log("\n Соединение с базой установленно");
+                        //console.log("\n Соединение с базой установленно");
                         database.execute(qrystr, function (err, results, fields) {
                                 //    database.execute(qrystr, function (err, results, fields) {
-                                console.log('result: "  ', results);
+                                //console.log('result: "  ', results);
                                 //data = results;
                                 wrapJson(results, fields, data);
                             },
