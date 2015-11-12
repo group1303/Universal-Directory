@@ -5,12 +5,11 @@ var express = require('express'),
 
 app.use(express.static(__dirname + '/views'));
 
-//var items = db.GetQuery('select * from chem_class');
-var items = db.queryDB('select * from chem_class');
+var classes = db.queryDB('select * from chem_class');
 
-app.get('/api', function (req, res) {
+app.get('/classes', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
-    res.send('My items: %j', items);
+    res.send(classes);
 });
 
 
