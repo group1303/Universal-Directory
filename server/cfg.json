@@ -8,5 +8,5 @@
     "pagesize": 16384,
     "charset": "UTF8",
 
-    "database": "c:\\users\\twen\\unidir\\curs.fdb"
+    "database": "curs.fdb"
 }
