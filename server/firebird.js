@@ -1,8 +1,7 @@
 var FBconnect
     , _ = require('underscore')
     , fs = require('fs')
-    , moment = require('moment')
-    , fb = require('node-firebird')
+    , fb = require('node-firebird');
 
 var fbconnect;
 
@@ -28,7 +27,7 @@ function LoadConfig() {
         fs.statSync(__dirname + '/cfg.json');
         var sCfg = fs.readFileSync(__dirname + '/cfg.json', 'utf8');
         cfg = JSON.parse(sCfg);
-        console.log('CFG ', __dirname);
+        //console.log('CFG ', __dirname);
     }
     catch (e) {
         console.log("Error loading config " + e.message)
@@ -39,7 +38,6 @@ function LoadConfig() {
 function logerror(err) {
     console.log(err.message);
 }
-
 
 function wrapJson(results, fields, jsondata) {
 var tloop = fields;
@@ -112,38 +110,10 @@ module.exports = {
 
             return database;
       },
-    GetEi: function(){
-        var CFG = LoadConfig();
-        var jsondata = new Array();
-        qrystr = 'select * from EI';
-
-        fb.attachOrCreate(
-            {
-                host: CFG.host, database: CFG.database, user: CFG.user, password: CFG.password
-            },
-            function (err, db) {
-                if (err) {
-                    console.log(err.message);
-                } else {
-                    database = db;
-                    //return database
-                    console.log("\n Соединение с базой установленно");
-                    database.execute(qrystr, function (err, results, fields) {
-                            //    database.execute(qrystr, function (err, results, fields) {
-                            //console.log('database.query result "EI"  ', results);
-
-                            wrapJson(results, fields, jsondata);
-                        },
-                        logerror);
-                }
-            }
-        );
-    return jsondata;
-},
     queryDB: function(qrystr){
 
             var CFG = LoadConfig();
-            var data = new Array();
+            var data = [];
 
             fb.attachOrCreate(
                 {
@@ -157,16 +127,13 @@ module.exports = {
                         //return database
                         //console.log("\n Соединение с базой установленно");
                         database.execute(qrystr, function (err, results, fields) {
-                                //    database.execute(qrystr, function (err, results, fields) {
-                                //console.log('result: "  ', results);
-                                //data = results;
+                                //database.execute(qrystr, function (err, results, fields) {
                                 wrapJson(results, fields, data);
                             },
                             logerror);
                     }
                 }
             );
-
     return data;
     },
 
