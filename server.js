@@ -5,6 +5,11 @@ var express = require('express'),
 
 app.use(express.static(__dirname + '/views'));
 
+app.get('/nav', function (req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(db.navData);
+});
+
 app.get('/classes', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send(db.classesData);
