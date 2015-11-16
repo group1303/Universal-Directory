@@ -11,7 +11,7 @@ $http.get('http://localhost:8080/classes')
 })
 .error(function(error, status, headers, config) {
      console.log(status);
-     console.log("Error occured");
+     console.log("Error data_content.js");
 });
 
 $scope.dataGridOptions = {
