@@ -1,7 +1,5 @@
 angular.module('UniDir.content', ['ngRoute','dx'])
 
-
-
 .controller('contentCtrl', ['$scope','$http', 
   function($scope, $http) {
 
