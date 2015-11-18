@@ -138,4 +138,47 @@ module.exports = {
     return data;
     },
 
+    transactionDB: function(qrystr,params){
+      var CFG = LoadConfig(),
+          jsondata = [];
+
+      fb.attachOrCreate({
+        host: CFG.host, 
+        database: CFG.database, 
+        user: CFG.user, 
+        password: CFG.password
+      },
+      
+        function (err, db){
+          if (err){
+              console.log(err.message);
+          }
+          else{
+            db.transaction(fb.ISOLATION_READ_COMMITED,
+              function (err, transaction){
+                transaction.execute(qrystr,[params],
+                  function(err, results, fields){
+                    if (err){
+                      transaction.rollback();
+                      logerror(err);
+                      return;
+                    }
+                    console.log(fields);
+                    wrapJson(results, fields, jsondata);
+                    console.log(jsondata);
+                    transaction.commit(function(err){
+                      if (err){
+                        transaction.rollback();
+                        logerror(err);}
+                      else{
+                        db.detach();
+                      }
+                    });
+                  });
+              });
+            }
+        });
+      return jsondata;
+    }
+
 };
