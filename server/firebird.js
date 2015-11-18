@@ -110,7 +110,7 @@ module.exports = {
 
             return database;
       },
-    queryDB: function(qrystr,params){
+    queryDB: function(qrystr, params){
 
             var CFG = LoadConfig();
             var data = [];
@@ -126,8 +126,9 @@ module.exports = {
                         database = db;
                         //return database
                         //console.log("\n Соединение с базой установленно");
-                        database.execute(qrystr,[params], function (err, results, fields) {
+                        database.execute(qrystr, [params], function (err, results, fields) {
                                 //database.execute(qrystr, function (err, results, fields) {
+                                //res2arr(results, fields, data);
                                 wrapJson(results, fields, data);
                             },
                             logerror);
