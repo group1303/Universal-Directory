@@ -184,6 +184,40 @@ module.exports = {
                 }
             );
     },
+    queryBLOB: function(qrystr, callback){
+
+            var CFG = LoadConfig();
+            var blobData = [];
+
+            fb.attachOrCreate(
+                {
+                    host: CFG.host, database: CFG.database, user: CFG.user, password: CFG.password
+                },
+                function (err, db) {
+                    if (err) {
+                      return callback(err.message);
+                    } else {
+                      database = db;
+                      database.query(qrystr, function (err, res) {
+                        res[0].image(function(err, name, e) {
+                          if (err){    
+                            console.log(err);
+                            throw err;
+                          }
+                          var base64 = '';
+                          e.on('data', function(chunk) {
+                            base64 += chunk;
+                          });
+                          e.on('end', function () {
+                            var buff = new Buffer(base64, 'binary').toString('utf8');
+                            callback(buff);
+                          });
+                        });
+                      });
+                    }
+                }
+            );
+    },
     transactionDB: function(qrystr,callback){
       var CFG = LoadConfig(),
           jsondata = [];
