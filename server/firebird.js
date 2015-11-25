@@ -175,10 +175,10 @@ module.exports = {
                         //return database
                         //console.log("\n Соединение с базой установленно");
                         database.execute(qrystr, function (err, results, fields) {
-                                //database.execute(qrystr, function (err, results, fields) {
-                                wrapJson(results, fields, data);
-                                //wrapJson(results, fields, data);
-                                callback(data);
+                          //database.execute(qrystr, function (err, results, fields) {
+                          wrapJson(results, fields, data);
+                          //wrapJson(results, fields, data);
+                          callback(data);
                         });
                     }
                 }
@@ -186,8 +186,11 @@ module.exports = {
     },
     queryBLOB: function(qrystr, callback){
 
-            var CFG = LoadConfig();
-            var blobData = [];
+            var CFG = LoadConfig(),
+                blobData = [],
+                counter = 0,
+                base64 = '',
+                tmpId = 0;
 
             fb.attachOrCreate(
                 {
@@ -198,26 +201,62 @@ module.exports = {
                       return callback(err.message);
                     } else {
                       database = db;
-                      database.query(qrystr, function (err, res) {
-                        res[0].image(function(err, name, e) {
-                          if (err){    
-                            console.log(err);
-                            throw err;
-                          }
-                          var base64 = '';
-                          e.on('data', function(chunk) {
+                      database.query(qrystr, function (err, res){
+                        _.map(res, function(buf, key){
+                          buf.image(function(err,name,e){
+                          // console.log("length of blobData",blobData.length)
+                            var tmpId = buf.id_class;
+                          e.on('data', function(chunk){
                             base64 += chunk;
                           });
-                          e.on('end', function () {
+                          e.on('end', function (){
                             var buff = new Buffer(base64, 'binary').toString('utf8');
-                            callback(buff);
-                          });
+                            blobData.push({tmpId, buff});
+                            //return buff;
+                          }); 
                         });
-                      });
+                        });//map
+                        //console.log(blobData);
+                        setTimeout(function () { 
+                          callback(blobData);
+                        }, 500);
+                      });//database.query
                     }
-                }
-            );
-    },
+                  }
+                )},
+                
+                      
+    // queryBLOB: function(qrystr, callback){
+    //   var CFG = LoadConfig(),
+    //     blobData = [],
+    //     counter = 0,
+    //     base64 = '',
+    //     tmpId = 0;
+    //   fb.attachOrCreate({host: CFG.host, database: CFG.database, user: CFG.user, password: CFG.password},
+    //     function (err, db) {
+    //       if (err) {
+    //         return callback(err.message);
+    //       } else {
+    //         database = db;
+    //         database.query(qrystr, function (err, res){
+    //           //console.log(res);
+    //           res[0].image(function(err,name,e){
+    //             //console.log(e.on);
+    //             e.on('data', function(chunk){
+    //               base64 += chunk;
+    //             });
+    //             e.on('end', function (){
+    //               var buff = new Buffer(base64, 'binary').toString('utf8');
+    //               callback(buff);
+    //               db.detach();
+    //             });
+    //           });
+    //         });
+    //       }
+    //     }
+    //   );
+    // },
+
     transactionDB: function(qrystr,callback){
       var CFG = LoadConfig(),
           jsondata = [];
