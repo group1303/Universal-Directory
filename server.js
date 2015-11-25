@@ -14,7 +14,7 @@ router.use(function(req, res, next) {
 
 /*-----Запросы------*/
 var classes = 'SELECT id_class,short_name,name,main_class,base_ei FROM chem_class;',
-    products = 'SELECT id_prod,short_name,name,id_CL FROM prod;',
+    products = 'SELECT p.id_prod,p.short_name,p.name,cc.name as class_name FROM prod p, chem_class cc where p.id_CL=cc.id_class;',
     params = 'SELECT id_par,short_name,name,ei_par,type_par FROM parametr;',
     ei = 'SELECT id_ei,short_name,name,code FROM ei;',
     en = 'SELECT id_enum,short_name,name FROM enum;',
@@ -51,8 +51,8 @@ function queryPr(prName, select, params, res){
 }
 
 function queryBLOB(qrystr, res){
+	//res.setHeader('Content-Type', 'text/plain');
 	db.queryBLOB(qrystr, function(data){
-		res.setHeader('Content-Type', 'text/plain');
 		res.send(data);
 	});
 }

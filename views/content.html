@@ -1,3 +1,23 @@
 <div ng-controller="contentCtrl">
-  <div dx-data-grid="dataGridOptions" class="DataGrid"></div>
+	<div dx-toast="{
+    message: 'The toast message',
+    type: 'success',
+    displayTime: 3000
+		}">
+	</div>
+  <!-- <div dx-data-grid="dataGridOptions" class="DataGrid"></div> -->
+  <div dx-list="dxListOptions" class="list">
+  	<div data-options="dxTemplate:{ name:'item' }">
+			
+		</div>
+  </div>
+  <div class="info">
+  	<div class="about">
+  		<div class="name">{{prodName}}</div>
+  		<div class="class">{{prodClass}}</div>
+  		<img scr=""{{img}}"">
+			
+  	</div>
+  </div>
+  
 </div>

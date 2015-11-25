@@ -67,18 +67,22 @@ $http.get('http://localhost:8080/products')
 
 $scope.dxListOptions = {
   bindingOptions: { 
-    dataSource: 'products'
+    dataSource: 'items'
     },
     onItemRendered: function(e) {
-      console.log(e.itemData);
+      
+      console.log(e);
       e.itemElement.empty("");
       e.itemElement.append("<img src=" + $scope.img + ">");
-      e.itemElement.append("<div class=\"listName\">" + e.itemData.NAME + "</div>");
-      e.itemElement.append("<div><b>Категория</b>: <i>" + e.itemData.ID_CL + "</i></div>");
-      e.itemElement.append("<div><b>Цена</b>: <i>" + e.itemData.ID_CL+100 + "</i></div>");
+      e.itemElement.append("<div class=\"listName\">" + e.itemData.ONAME + "<br>Категория: " + e.itemData.ONAMECLASS + "</div>");
+      e.itemElement.append("<div class=\"listPrice\">Цена: " + e.itemData.OIDCLASS+100 + "</div>");
+  },
+    onItemClick: function(e) {
+      $scope.prodName = e.itemData.ONAME;
+      $scope.prodClass = e.itemData.OIDCLASS;
     },
-  
-    
+  paginate: true,
+  autoPagingEnabled: true,
   
   showReorderControls: true,
   showSelectionControls: true
