@@ -39,6 +39,54 @@ function logerror(err) {
     console.log(err.message);
 }
 
+function toObject(results, fields, data)
+{
+    var tloop = fields;
+    var ftype = [];
+    _.each(tloop, function (metadesc, key)
+    {
+        fields[key] = metadesc.alias;
+        ftype[key] = metadesc.type;
+    });
+    
+    var maxCols = fields.length - 1;
+    var holdrow = '';
+    var fieldtype = '';
+    var fieldname = '';
+    var value = '';
+    _.each(_.toArray(results), function (humheader, keyheader)
+    {
+        holdrow = '';
+        _.each(fields, function (num, key)
+        {
+            // for json and ngrid let get rid of spaces
+            fieldname = fields[key];
+            fieldtype = ftype[key];
+            fieldname = fieldname.replace(/ /gi, "");// golabal replace flag gi str.replace(/<br>/gi,'\r');
+            value = humheader[key];
+            if(key == 0)
+            {
+                holdrow += '{';
+            }
+                 
+            holdrow += fieldname + ': ';
+            
+            if(fieldtype === 448)
+                holdrow += '"' + value + '",';
+            else
+                holdrow += value + ',';
+
+            if(key == maxCols)
+            {
+                holdrow += '}';
+            }
+        });
+        // jsondata[keyheader] = JSON.parse(holdrow);
+        data[keyheader] = holdrow;
+    });
+    return data;
+}
+
 function wrapJson(results, fields, jsondata) {
 var tloop = fields;
 var ftype = '';
@@ -110,7 +158,7 @@ module.exports = {
 
             return database;
       },
-    queryDB: function(qrystr, params){
+    queryDB: function(qrystr, callback){
 
             var CFG = LoadConfig();
             var data = [];
@@ -121,24 +169,95 @@ module.exports = {
                 },
                 function (err, db) {
                     if (err) {
-                        console.log(err.message);
+                        return callback(err.message);
                     } else {
                         database = db;
                         //return database
                         //console.log("\n Соединение с базой установленно");
-                        database.execute(qrystr, [params], function (err, results, fields) {
-                                //database.execute(qrystr, function (err, results, fields) {
-                                //res2arr(results, fields, data);
-                                wrapJson(results, fields, data);
-                            },
-                            logerror);
+                        database.execute(qrystr, function (err, results, fields) {
+                          //database.execute(qrystr, function (err, results, fields) {
+                          wrapJson(results, fields, data);
+                          //wrapJson(results, fields, data);
+                          callback(data);
+                        });
                     }
                 }
             );
-    return data;
     },
+    queryBLOB: function(qrystr, callback){
 
-    transactionDB: function(qrystr,params){
+            var CFG = LoadConfig(),
+                blobData = [],
+                counter = 0,
+                base64 = '',
+                tmpId = 0;
+
+            fb.attachOrCreate(
+                {
+                    host: CFG.host, database: CFG.database, user: CFG.user, password: CFG.password
+                },
+                function (err, db) {
+                    if (err) {
+                      return callback(err.message);
+                    } else {
+                      database = db;
+                      database.query(qrystr, function (err, res){
+                        _.map(res, function(buf, key){
+                          buf.image(function(err,name,e){
+                          // console.log("length of blobData",blobData.length)
+                            var tmpId = buf.id_class;
+                          e.on('data', function(chunk){
+                            base64 += chunk;
+                          });
+                          e.on('end', function (){
+                            var buff = new Buffer(base64, 'binary').toString('utf8');
+                            blobData.push({tmpId, buff});
+                            //return buff;
+                          }); 
+                        });
+                        });//map
+                        //console.log(blobData);
+                        setTimeout(function () { 
+                          callback(blobData);
+                        }, 500);
+                      });//database.query
+                    }
+                  }
+                )},
+                
+                      
+    // queryBLOB: function(qrystr, callback){
+    //   var CFG = LoadConfig(),
+    //     blobData = [],
+    //     counter = 0,
+    //     base64 = '',
+    //     tmpId = 0;
+    //   fb.attachOrCreate({host: CFG.host, database: CFG.database, user: CFG.user, password: CFG.password},
+    //     function (err, db) {
+    //       if (err) {
+    //         return callback(err.message);
+    //       } else {
+    //         database = db;
+    //         database.query(qrystr, function (err, res){
+    //           //console.log(res);
+    //           res[0].image(function(err,name,e){
+    //             //console.log(e.on);
+    //             e.on('data', function(chunk){
+    //               base64 += chunk;
+    //             });
+    //             e.on('end', function (){
+    //               var buff = new Buffer(base64, 'binary').toString('utf8');
+    //               callback(buff);
+    //               db.detach();
+    //             });
+    //           });
+    //         });
+    //       }
+    //     }
+    //   );
+    // },
+
+    transactionDB: function(qrystr,callback){
       var CFG = LoadConfig(),
           jsondata = [];
 
@@ -156,29 +275,27 @@ module.exports = {
           else{
             db.transaction(fb.ISOLATION_READ_COMMITED,
               function (err, transaction){
-                transaction.execute(qrystr,[params],
-                  function(err, results, fields){
+                transaction.execute(qrystr, function(err, results, fields){
                     if (err){
                       transaction.rollback();
                       logerror(err);
                       return;
+                    } else {
+                        wrapJson(results, fields, jsondata);
+                        transaction.commit(function(err){
+                          if (err){
+                            transaction.rollback();
+                            logerror(err);}
+                          else{
+                            callback(jsondata);
+                            db.detach();
+                          }
+                        });
                     }
-                    console.log(fields);
-                    wrapJson(results, fields, jsondata);
-                    console.log(jsondata);
-                    transaction.commit(function(err){
-                      if (err){
-                        transaction.rollback();
-                        logerror(err);}
-                      else{
-                        db.detach();
-                      }
-                    });
                   });
               });
             }
         });
-      return jsondata;
     }
 
 };

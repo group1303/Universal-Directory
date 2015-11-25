@@ -69,17 +69,39 @@ html{
     background-color: #FAFAFA;
 }
 
+.list{
+    height: 468px;
+    min-width: 620px;
+    width: 50%;
+    border-right: 1px solid #d3d3d3;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.dx-pager {
+    padding: 9px;
+}
 
 
+.list img {
+    float: left;
+    width: 150px;
+    height: 150px;
+    padding: 10px;
+}
 
+.list .listName {
+    display: inline-block;
+    float: left;
+    line-height: 40px;
+    padding-top: 35px;
+}
 
-
-
-
-
-
-
-
+.listPrice {
+    float: right;
+    line-height: 150px;
+    display: inline-block;
+    margin-right: 3%;
+}
 
 
 
