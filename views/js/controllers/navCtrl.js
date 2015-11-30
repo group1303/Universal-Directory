@@ -15,14 +15,33 @@ angular.module('UniDir.nav', ['ngRoute','dx'])
     console.log("Error nav");
   });
 
+  Array.prototype.in_array = function(p_val) {
+    for(var i = 0, l = this.length; i < l; i++) {
+      if(this[i] == p_val) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  var parentsIds = [2,3,9,12];
+
   $scope.treeView = {
     bindingOptions: {
       dataSource: 'nav',
     },
     onItemClick: function(e) {
-      $rootScope.$broadcast("navClassId", {
+      if (parentsIds.in_array(e.itemData.ID_CLASS)){
+        $rootScope.$broadcast("displayChildOrProd", {
+        displayProds: false,
         id: e.itemData.ID_CLASS
       })
+      } else {
+        $rootScope.$broadcast("displayChildOrProd", {
+        displayProds: true,
+        id: e.itemData.ID_CLASS
+      })
+      }
     },
     dataStructure: 'plain',
     parentIdExpr: "MAIN_CLASS",
