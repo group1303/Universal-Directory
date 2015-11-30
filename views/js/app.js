@@ -1,3 +1,5 @@
+"use strict";
+
 angular.module('UniDir', [
                'UniDir.content',
                'UniDir.help',

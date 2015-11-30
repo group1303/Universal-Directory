@@ -1,22 +1,31 @@
 <div ng-controller="contentCtrl">
-	<div dx-toast="{
+	<!-- <div dx-toast="{
     message: 'The toast message',
     type: 'success',
     displayTime: 3000
 		}">
-	</div>
+	</div> -->
   <!-- <div dx-data-grid="dataGridOptions" class="DataGrid"></div> -->
-  <div dx-list="dxListOptions" class="list">
-  	<div data-options="dxTemplate:{ name:'item' }">
-			
-		</div>
+  <div class="list" ng-hide="displayProds">
+  	<ul class="gridList">
+  		<a ng-repeat="item in items">
+  			<li>
+  				<div class="img-wrap2">
+  					<img data-ng-src="{{img}}">
+  				</div>
+  				<span>{{item.NAME}}</span>
+  			</li>
+  		</a>
+		</ul>
+  </div>
+  <div dx-list="dxListOptions" class="list" ng-show="displayProds">
+  	<div data-options="dxTemplate:{ name:'item' }"></div>
   </div>
   <div class="info">
   	<div class="about">
-  		<div class="name">{{prodName}}</div>
-  		<div class="class">{{prodClass}}</div>
-  		<img scr=""{{img}}"">
-			
+  		<div class="name">{{selectedItem.name}}</div>
+  		<div class="class">{{selectedItem.classId}}</div>
+  		<img data-ng-src="{{selectedItem.img}}"/>
   	</div>
   </div>
   

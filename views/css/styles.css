@@ -9,6 +9,11 @@ html{
     background-color: #e7e7e7;
 }
 
+ul{
+    list-style-type: none;
+    margin: 0;
+}
+
 .navigation{
     position: relative;
     top: 0;
@@ -83,10 +88,19 @@ html{
 
 
 .list img {
-    float: left;
-    width: 150px;
+    width: 140px;
+    vertical-align: middle;
+    margin: 0 auto;
+}
+
+.list .img-wrap {
+    background-color: white;
     height: 150px;
-    padding: 10px;
+    line-height: 146px;
+    width: 150px;
+    float: left;
+    margin: 10px;
+    border: #cccccc solid 2px;
 }
 
 .list .listName {
@@ -104,10 +118,35 @@ html{
 }
 
 
+.list .gridList {
+    padding: 10px;
+}
 
+.list .gridList {
+    list-style-type: none;
+    text-align: center;
+}
 
-
-
+.list .gridList li {
+    display: inline-block;
+    min-width: 190px;
+    margin: 10px;
+}
+.list .gridList li .img-wrap2 {
+    width: 150px;
+    margin: 0 auto;
+    line-height: 146px;
+    background-color: white;
+    height: 150px;
+    border: #cccccc solid 1px;
+}
+.list .gridList li img{
+    vertical-align: middle;
+    margin: 0 auto;
+}
+.list .gridList li span {
+    
+}
 
 /*-----???------*/
 .form > div {
