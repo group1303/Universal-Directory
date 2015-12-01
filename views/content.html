@@ -3,48 +3,8 @@
     message: 'The toast message',
     type: 'success',
     displayTime: 3000
-<<<<<<< HEAD
 		}">
 	</div> -->
-  <!-- <div dx-data-grid="dataGridOptions" class="DataGrid"></div> -->
-  <div class="list">
-  	<ul class="gridList" ng-hide="displayProds">
-			<li ng-repeat="item in items">
-  			<a href="" >
-  				<div class="img-wrap2">
-  					<img data-ng-src="{{img}}">
-  				</div>
-  				<span>{{item.NAME}}</span>
-  			</a>
-			</li>
-		</ul>
-		<div dx-list="dxListOptions" dx-item-alias="items" ng-show="displayProds">
-  		<div data-options="dxTemplate:{ name:'item' }">
-  			<div class="img-wrap">
-  				<img data-ng-src="{{listImg}}">
-  			</div>
-      <div class="listName">{{listImg}}
-      	<br>Категория: {{listClassName}}
-      </div>
-      <div class="listPrice">Цена: {{listPrice}}</div>
-
-  		</div>
-  	</div>
-  </div>
-  <div style="width: 49%; height: 469px;float: left;"></div>
-  <div class="clear"></div>
-  <div class="info">
-  	<div class="about">
-  		<div class="name">{{selectedItem.name}}</div>
-  		<div class="class">{{selectedItem.classId}}</div>
-  		<img data-ng-src="{{selectedItem.img}}"/>
-  	</div>
-  </div>
-  
-  
-=======
-        }">
-    </div> -->
     <!-- <div dx-data-grid="dataGridOptions" class="DataGrid"></div> -->
     <div class="list" ng-hide="displayProds">
         <ul class="gridList">
@@ -75,6 +35,4 @@
             <img data-ng-src="{{selectedItem.img}}"/>
         </div>
     </div>
-
->>>>>>> a3609b8b0fb3c8b757540fd91000802d9877fc7e
 </div>
