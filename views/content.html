@@ -8,20 +8,29 @@
   <!-- <div dx-data-grid="dataGridOptions" class="DataGrid"></div> -->
   <div class="list">
   	<ul class="gridList" ng-hide="displayProds">
-  		<a ng-repeat="item in items">
-  			<li>
+			<li ng-repeat="item in items">
+  			<a href="" >
   				<div class="img-wrap2">
   					<img data-ng-src="{{img}}">
   				</div>
   				<span>{{item.NAME}}</span>
-  			</li>
-  		</a>
+  			</a>
+			</li>
 		</ul>
-		<div dx-list="dxListOptions" ng-show="displayProds">
-  		<div data-options="dxTemplate:{ name:'item' }"></div>
+		<div dx-list="dxListOptions" dx-item-alias="items" ng-show="displayProds">
+  		<div data-options="dxTemplate:{ name:'item' }">
+  			<div class="img-wrap">
+  				<img data-ng-src="{{listImg}}">
+  			</div>
+      <div class="listName">{{listImg}}
+      	<br>Категория: {{listClassName}}
+      </div>
+      <div class="listPrice">Цена: {{listPrice}}</div>
+
+  		</div>
   	</div>
   </div>
-  <div style="width: 50%;background-color:gray; height: 469px;float: left;"></div>
+  <div style="width: 49%; height: 469px;float: left;"></div>
   <div class="clear"></div>
   <div class="info">
   	<div class="about">
