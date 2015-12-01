@@ -6,8 +6,8 @@
 		}">
 	</div> -->
   <!-- <div dx-data-grid="dataGridOptions" class="DataGrid"></div> -->
-  <div class="list" ng-hide="displayProds">
-  	<ul class="gridList">
+  <div class="list">
+  	<ul class="gridList" ng-hide="displayProds">
   		<a ng-repeat="item in items">
   			<li>
   				<div class="img-wrap2">
@@ -17,10 +17,12 @@
   			</li>
   		</a>
 		</ul>
+		<div dx-list="dxListOptions" ng-show="displayProds">
+  		<div data-options="dxTemplate:{ name:'item' }"></div>
+  	</div>
   </div>
-  <div dx-list="dxListOptions" class="list" ng-show="displayProds">
-  	<div data-options="dxTemplate:{ name:'item' }"></div>
-  </div>
+  <div style="width: 50%;background-color:gray; height: 469px;float: left;"></div>
+  <div class="clear"></div>
   <div class="info">
   	<div class="about">
   		<div class="name">{{selectedItem.name}}</div>
@@ -28,5 +30,6 @@
   		<img data-ng-src="{{selectedItem.img}}"/>
   	</div>
   </div>
+  
   
 </div>
