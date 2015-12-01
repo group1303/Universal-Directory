@@ -31,6 +31,31 @@ function getProdImg (prodId){
 }
 getClasses(2);
 
+Array.prototype.in_array = function(p_val) {
+  for(var i = 0, l = this.length; i < l; i++) {
+    if(this[i] == p_val) {
+      return true;
+    }
+  }
+  return false;
+}
+
+$scope.clickOnParent = function(clickedProdId){
+  var parentsIds = [2,3,9,12];
+  console.log(clickedProdId);
+  if (parentsIds.in_array(clickedProdId)){
+        $rootScope.$broadcast("displayChildOrProd", {
+        displayProds: false,
+        id: clickedProdId
+      })
+      } else {
+        $rootScope.$broadcast("displayChildOrProd", {
+        displayProds: true,
+        id: clickedProdId
+      })
+}
+}
+
 $scope.$on ("displayChildOrProd", function(event, args) {
   if (args.displayProds == false){
     $scope.displayProds = false;

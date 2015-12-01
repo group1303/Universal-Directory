@@ -8,14 +8,14 @@
     <!-- <div dx-data-grid="dataGridOptions" class="DataGrid"></div> -->
     <div class="list" ng-hide="displayProds">
         <ul class="gridList">
-            <a ng-repeat="item in items">
-                <li>
+            <li ng-repeat="item in items">
+                <a href="" ng-click="clickOnParent(item.ID_CLASS)">
                     <div class="img-wrap2">
                         <img data-ng-src="{{img}}">
                     </div>
                     <span>{{item.NAME}}</span>
-                </li>
-            </a>
+                </a>
+            </li>
         </ul>
     </div>
     <div dx-list="dxListOptions" class="list" ng-show="displayProds">
@@ -23,7 +23,7 @@
     </div>
     <div style="width: 49%; height: 469px;float: left;">
         <div  dx-number-box="numberBox" ng-repeat="paramItem in paramsItems" ng-show="displayProds">
-            paramItem.prodParams
+            <!-- paramItem.prodParams -->
         </div>
     </div>
 
