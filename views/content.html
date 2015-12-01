@@ -1,8 +1,9 @@
 <div ng-controller="contentCtrl">
-	<!-- <div dx-toast="{
+    <!-- <div dx-toast="{
     message: 'The toast message',
     type: 'success',
     displayTime: 3000
+<<<<<<< HEAD
 		}">
 	</div> -->
   <!-- <div dx-data-grid="dataGridOptions" class="DataGrid"></div> -->
@@ -41,4 +42,39 @@
   </div>
   
   
+=======
+        }">
+    </div> -->
+    <!-- <div dx-data-grid="dataGridOptions" class="DataGrid"></div> -->
+    <div class="list" ng-hide="displayProds">
+        <ul class="gridList">
+            <a ng-repeat="item in items">
+                <li>
+                    <div class="img-wrap2">
+                        <img data-ng-src="{{img}}">
+                    </div>
+                    <span>{{item.NAME}}</span>
+                </li>
+            </a>
+        </ul>
+    </div>
+    <div dx-list="dxListOptions" class="list" ng-show="displayProds">
+        <div data-options="dxTemplate:{ name:'item' }"></div>
+    </div>
+    <div style="width: 49%; height: 469px;float: left;">
+        <div  dx-number-box="numberBox" ng-repeat="paramItem in paramsItems" ng-show="displayProds">
+            paramItem.prodParams
+        </div>
+    </div>
+
+    <div class="clear"></div>
+    <div class="info">
+        <div class="about">
+            <div class="name">{{selectedItem.name}}</div>
+            <div class="class">{{selectedItem.classId}}</div>
+            <img data-ng-src="{{selectedItem.img}}"/>
+        </div>
+    </div>
+
+>>>>>>> a3609b8b0fb3c8b757540fd91000802d9877fc7e
 </div>
