@@ -80,6 +80,7 @@ ul{
     width: 50%;
     border-right: 1px solid #d3d3d3;
     border-bottom: 1px solid #d3d3d3;
+    float: left;
 }
 
 .dx-pager {
@@ -129,7 +130,7 @@ ul{
 
 .list .gridList li {
     display: inline-block;
-    min-width: 190px;
+    min-width: 200px;
     margin: 10px;
 }
 .list .gridList li .img-wrap2 {
@@ -146,6 +147,11 @@ ul{
 }
 .list .gridList li span {
     
+}
+
+
+.clear{
+    clear:left;
 }
 
 /*-----???------*/
