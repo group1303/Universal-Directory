@@ -39,6 +39,8 @@ $scope.$on ("displayChildOrProd", function(event, args) {
   } else {
     $scope.displayProds = true;//display prods
     getProds(args.id);
+
+    getParamsId(args.id);
     //console.log("Now display prods",$scope.displayProds);
     }
 });
@@ -46,8 +48,8 @@ $scope.$on ("displayChildOrProd", function(event, args) {
 function getProds(classId){
   $http.get('http://localhost:8080/getProds' + classId)
     .success(function(data, status, headers, config) {
-      $scope.items = data;
-      console.log(data);
+      $scope.prodsItems = data;
+      //console.log(data);
     })
     .error(function(error, status, headers, config) {
       console.log(status);
@@ -59,14 +61,24 @@ function getClasses(classId){
   $http.get('http://localhost:8080/getClasses' + classId)
     .success(function(data, status, headers, config) {
       $scope.items = data;
-      console.log(data);
+      //console.log(data);
     })
     .error(function(error, status, headers, config) {
       console.log(status);
       console.log("getClasses error");
     });
 };
-
+function getParamsId(Id){
+  $http.get('http://localhost:8080/pars' + Id)
+      .success(function(data, status, headers, config) {
+        $scope.paramsItems = data;
+        //console.log(data);
+      })
+      .error(function(error, status, headers, config) {
+        console.log(status);
+        console.log("getClasses error");
+      });
+}
 // $scope.dx-toast = {
 
 // }
@@ -86,7 +98,14 @@ function getClasses(classId){
 
 //   imgs.push([{elId, img64}]);
 // }
-
+$scope.numberBox = {
+  bindingOptions: {
+    dataSource: 'prodsItems',
+    value: 'prodsItems.productName'
+  },
+  showSpinButtons: true,
+  showClearButton: true
+}
 $scope.selectedItem = {
   name: '',
   classId: '',
@@ -98,20 +117,20 @@ $scope.childs;
 //console.log($scope.prodsImg);
 $scope.dxListOptions = {
   bindingOptions: { 
-    dataSource: 'items'
+    dataSource: 'prodsItems'
     },
     onItemRendered: function(e) {
-
+      console.log(e.itemData);
       e.itemElement.empty("");
       e.itemElement.append("<div class=\"img-wrap\"><img src=\"" + getProdImg(e.itemData.OIDEL) + "\"></div>");
-      e.itemElement.append("<div class=\"listName\">" + e.itemData.ONAME + "<br>Категория: " + e.itemData.ONAMECLASS + "</div>");
-      e.itemElement.append("<div class=\"listPrice\">Цена: " + e.itemData.OIDCLASS+100 + "</div>");
+      e.itemElement.append("<div class=\"listName\">" + e.itemData.productName + "<br>Категория: " + e.itemData.productClassName + "</div>");
+      e.itemElement.append("<div class=\"listPrice\">Цена: " + 100 + "</div>");
   },
     onItemClick: function(e) {
-      $scope.selectedItem.name = e.itemData.ONAME;
-      $scope.selectedItem.classId = e.itemData.OIDCLASS;
-      $scope.selectedItem.price = '500';
-      $scope.selectedItem.img = getProdImg(e.itemData.OIDEL);
+      //$scope.selectedItem.name = e.itemData.ONAME;
+      //$scope.selectedItem.classId = e.itemData.OIDCLASS;
+      //$scope.selectedItem.price = '500';
+      //$scope.selectedItem.img = getProdImg(e.itemData.OIDEL);
     },
   paginate: true,
   autoPagingEnabled: true,
