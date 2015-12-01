@@ -120,22 +120,19 @@ $scope.dxListOptions = {
     dataSource: 'prodsItems'
     },
     onItemRendered: function(e) {
-<<<<<<< HEAD
-      $scope.listImg = ProdImg(e.itemData.OIDEL);
-      $scope.listClassName = e.itemData.ONAME;
-      $scope.listPrice = e.itemData.OIDCLASS+10;
+      // $scope.listImg = ProdImg(e.itemData.OIDEL);
+      // $scope.listClassName = e.itemData.ONAME;
+      // $scope.listPrice = e.itemData.OIDCLASS+10;
 
       // e.itemElement.empty("");
       // e.itemElement.append("<div class=\"img-wrap\"><img src=\"" + getProdImg(e.itemData.OIDEL) + "\"></div>");
       // e.itemElement.append("<div class=\"listName\">" + e.itemData.ONAME + "<br>Категория: " + e.itemData.ONAMECLASS + "</div>");
       // e.itemElement.append("<div class=\"listPrice\">Цена: " + e.itemData.OIDCLASS+100 + "</div>");
-=======
       console.log(e.itemData);
       e.itemElement.empty("");
       e.itemElement.append("<div class=\"img-wrap\"><img src=\"" + getProdImg(e.itemData.OIDEL) + "\"></div>");
       e.itemElement.append("<div class=\"listName\">" + e.itemData.productName + "<br>Категория: " + e.itemData.productClassName + "</div>");
       e.itemElement.append("<div class=\"listPrice\">Цена: " + 100 + "</div>");
->>>>>>> a3609b8b0fb3c8b757540fd91000802d9877fc7e
   },
     onItemClick: function(e) {
       //$scope.selectedItem.name = e.itemData.ONAME;
