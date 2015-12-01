@@ -101,11 +101,14 @@ $scope.dxListOptions = {
     dataSource: 'items'
     },
     onItemRendered: function(e) {
+      $scope.listImg = ProdImg(e.itemData.OIDEL);
+      $scope.listClassName = e.itemData.ONAME;
+      $scope.listPrice = e.itemData.OIDCLASS+10;
 
-      e.itemElement.empty("");
-      e.itemElement.append("<div class=\"img-wrap\"><img src=\"" + getProdImg(e.itemData.OIDEL) + "\"></div>");
-      e.itemElement.append("<div class=\"listName\">" + e.itemData.ONAME + "<br>Категория: " + e.itemData.ONAMECLASS + "</div>");
-      e.itemElement.append("<div class=\"listPrice\">Цена: " + e.itemData.OIDCLASS+100 + "</div>");
+      // e.itemElement.empty("");
+      // e.itemElement.append("<div class=\"img-wrap\"><img src=\"" + getProdImg(e.itemData.OIDEL) + "\"></div>");
+      // e.itemElement.append("<div class=\"listName\">" + e.itemData.ONAME + "<br>Категория: " + e.itemData.ONAMECLASS + "</div>");
+      // e.itemElement.append("<div class=\"listPrice\">Цена: " + e.itemData.OIDCLASS+100 + "</div>");
   },
     onItemClick: function(e) {
       $scope.selectedItem.name = e.itemData.ONAME;
@@ -114,7 +117,7 @@ $scope.dxListOptions = {
       $scope.selectedItem.img = getProdImg(e.itemData.OIDEL);
     },
   paginate: true,
-  autoPagingEnabled: true,
+utoPagingEnabled: true,
   
   showReorderControls: true,
   showSelectionControls: true
