@@ -50,7 +50,7 @@ function query(qrystr, res) {
 function queryPr(prName, select, params, res) {
     return query('select ' + select + ' from ' + prName + '(' + params + ');', res);
 }
-function c(id, res) {
+function getFindList(id, res) {
     var str1 = 'select * from find_list(' + id + ');';
     var arrProdPars = [], prodParams = [];
     db.queryDB(str1, function (dataOne) {
