@@ -150,6 +150,11 @@ ul{
 .list a {
     text-decoration: none;
     color: inherit;
+}  
+.params{
+    width: 49%;
+    height: 469px;
+    float: left;
 }
 
 .clear{

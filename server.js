@@ -85,14 +85,14 @@ function getFindList(id, res) {
                 	arrProdPars.push([{productID, productName, productClassName, productImage, prodParams}]);
                 	prodParams = [];
 	            	});
-            	},5);
+            	},10);
           	}
         });
         setTimeout(function () {
             //console.log(arrProdPars[0].prodParams);
             res.setHeader('Content-Type', 'application/json');
             res.send(arrProdPars);
-        }, 150);
+        }, 200);
     });
 };
 
