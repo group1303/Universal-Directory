@@ -177,7 +177,6 @@ module.exports = {
 						database.execute(qrystr, function (err, results, fields) {
 						  //database.execute(qrystr, function (err, results, fields) {
 						  wrapJson(results, fields, data);
-						  //wrapJson(results, fields, data);
 						  callback(data);
 						});
 					}
