@@ -31,6 +31,7 @@ $scope.clickOnParent = function(clickedProdId){
 }
 
 $scope.$on ("displayChildOrProd", function(event, args) {
+  $scope.selectedItem.display = false;
   if (args.displayProds == false){
     $scope.displayProds = false;
     //console.log("Now display childs",$scope.displayProds);
@@ -38,7 +39,6 @@ $scope.$on ("displayChildOrProd", function(event, args) {
   } else {
     $scope.displayProds = true;//display prods
     getProds(args.id);
-
     //getParamsId(args.id);
     //console.log("Now display prods",$scope.displayProds);
     }
@@ -99,9 +99,11 @@ $scope.numberBox = {
 }
 $scope.selectedItem = {
   name: '',
-  classId: '',
+  className: '',
   price: '',
-  img: ''
+  img: '',
+  display: false,
+  params: ''
 }
 $scope.childs;
 
@@ -110,17 +112,19 @@ $scope.dxListOptions = {
     dataSource: 'prodsItems'
     },
     onItemRendered: function(e) {
-      console.log(e.itemData[0]);
       e.itemElement.empty("");
       e.itemElement.append("<div class=\"img-wrap\"><img src=\"" + e.itemData[0].productImage + "\"></div>");
       e.itemElement.append("<div class=\"listName\">" + e.itemData[0].productName + "<br>Категория: " + e.itemData[0].productClassName + "</div>");
       e.itemElement.append("<div class=\"listPrice\">Цена: " + e.itemData[0].productID+100 + "</div>");
   },
     onItemClick: function(e) {
-      //$scope.selectedItem.name = e.itemData.ONAME;
-      //$scope.selectedItem.classId = e.itemData.OIDCLASS;
-      //$scope.selectedItem.price = '500';
-      //$scope.selectedItem.img = getProdImg(e.itemData.OIDEL);
+      $scope.selectedItem.display = true;
+      $scope.selectedItem.name = e.itemData[0].productName;
+      $scope.selectedItem.className = e.itemData[0].productClassName;
+      $scope.selectedItem.price = e.itemData[0].productID+100;
+      $scope.selectedItem.img = e.itemData[0].productImage;
+      $scope.selectedItem.params = e.itemData[0].prodParams;
+      console.log($scope.selectedItem.params);
     },
   paginate: true,
   showReorderControls: true,

@@ -1,38 +1,47 @@
 <div ng-controller="contentCtrl">
-    <!-- <div dx-toast="{
-    message: 'The toast message',
-    type: 'success',
-    displayTime: 3000
-		}">
-	</div> -->
-    <!-- <div dx-data-grid="dataGridOptions" class="DataGrid"></div> -->
     <div class="list" ng-hide="displayProds">
-        <ul class="gridList">
-            <li ng-repeat="item in items">
-                <a href="" ng-click="clickOnParent(item.ID_CLASS)">
-                    <div class="img-wrap2">
-                       <img data-ng-src="{{item.IMAGE}}"/>
-                    </div>
-                    <span>{{item.NAME}}</span>
-                </a>
-            </li>
-        </ul>
+      <ul class="gridList">
+        <li ng-repeat="item in items">
+          <a href="" ng-click="clickOnParent(item.ID_CLASS)">
+            <div class="img-wrap img-wrap2">
+             <img data-ng-src="{{item.IMAGE}}"/>
+            </div>
+            <span>{{item.NAME}}</span>
+          </a>
+        </li>
+      </ul>
     </div>
     <div dx-list="dxListOptions" class="list" ng-show="displayProds">
         <div data-options="dxTemplate:{ name:'item' }"></div>
     </div>
-    <div class="params">
-        <div  dx-number-box="numberBox" ng-repeat="paramItem in paramsItems" ng-show="displayProds">
-            <!-- paramItem.prodParams -->
-        </div>
+    <div class="list" >
+
+      <div  dx-number-box="numberBox" ng-repeat="paramItem in paramsItems" ng-show="displayProds">
+          <!-- paramItem.prodParams -->
+      </div>
     </div>
 
     <div class="clear"></div>
-    <div class="info">
+    <div class="info" ng-show="selectedItem.display">
         <div class="about">
-            <div class="name">{{selectedItem.name}}</div>
-            <div class="class">{{selectedItem.classId}}</div>
-            <img data-ng-src="{{selectedItem.img}}"/>
+      		<div class="img-wrap infoImg">
+          	<img data-ng-src="{{selectedItem.img}}"/>
+          </div>
+          <div class="prodInfoWrap">
+        	<div class="prodName">Название: <span>{{selectedItem.name}}</span>
+          </div>
+        	<div class="prodClass">Категория: <span>{{selectedItem.className}}</span>
+          </div>
+        	<div class="prodPrice">Цена: <span>{{selectedItem.price}}</span>
+          </div>
+       	</div>
+          <div class="prodParams">
+           		<div ng-repeat="prodParamItem in selectedItem.params">
+           			<div>{{prodParamItem.namePar}}: 
+           			<span>{{prodParamItem.valuePar}} {{prodParamItem.shortNamePar}}</span></div>
+           		</div>
+           </div>
+        
         </div>
     </div>
 </div>

@@ -76,7 +76,7 @@ ul{
 
 .list{
     height: 468px;
-    width: 50%;
+    width: 49%;
     border-right: 1px solid #d3d3d3;
     border-bottom: 1px solid #d3d3d3;
     float: left;
@@ -87,13 +87,13 @@ ul{
 }
 
 
-.list img {
+.img-wrap img {
     width: 140px;
     vertical-align: middle;
     margin: 0 auto;
 }
 
-.list .img-wrap {
+.img-wrap {
     background-color: white;
     height: 150px;
     line-height: 146px;
@@ -133,13 +133,10 @@ ul{
     margin: 10px;
 }
 .list .gridList li .img-wrap2 {
-    width: 150px;
     margin: 0 auto;
-    line-height: 146px;
-    background-color: white;
-    height: 150px;
-    border: #cccccc solid 1px;
+    float: none;
 }
+
 .list .gridList li img{
     vertical-align: middle;
     margin: 0 auto;
@@ -160,6 +157,30 @@ ul{
 .clear{
     clear:left;
 }
+
+.about{
+    width: 50%;
+}
+.infoImg{
+    margin: 30px;
+}
+.prodParams{
+    margin-left: 30px;
+    margin-top: 5px;
+    float: left;
+}
+
+.about span{
+    font-weight: bold;
+}
+
+.prodInfoWrap{
+    float: left;
+    margin-left: 30px;
+    margin-top: 30px;
+}
+
+
 
 /*-----???------*/
 .form > div {
