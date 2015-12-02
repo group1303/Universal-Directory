@@ -7,6 +7,8 @@ npm-debug.log*
 pids
 *.pid
 *.seed
+thumbs.db
+cfg.json
 
 # node-waf configuration
 .lock-wscript
@@ -23,4 +25,4 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
-server/cfg.json
+c

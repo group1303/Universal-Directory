@@ -78,7 +78,7 @@ function getFindList(id, res) {
             //console.log(arrProdPars[0].prodParams);
             res.setHeader('Content-Type', 'application/json');
             res.send(arrProdPars);
-        }, 1000);
+        }, 100);
     });
 };
 
