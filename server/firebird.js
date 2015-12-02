@@ -234,9 +234,11 @@ module.exports = {
 					} else {
 					  database = db;
 					  database.query(qrystr, function (err, res){
+					  	//console.log(res);
 							res[0].image(function(err,name,e){
 								if (err) throw err;
-								var pId = res[0].id_prod;
+
+								var pId = res[0].id;
 						  	e.on('data', function(chunk){
 						  		//console.log("считываю чанки");
 									base64 += chunk;

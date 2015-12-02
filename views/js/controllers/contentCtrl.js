@@ -21,6 +21,7 @@ function getProdImg (prodId){
     $http.get('http://localhost:8080/prodImg' + prodId)
     .success(function(data, status, headers, config) {
         $scope.returnedImg = data;
+        console.log($scope.returnedImg);
     })
     .error(function(error, status, headers, config) {
          console.log(status);
@@ -29,6 +30,24 @@ function getProdImg (prodId){
     return $scope.returnedImg;
   }
 }
+
+function getClassImg (classId){
+  if (classId == undefined) {
+    console.log("getProdImg error");
+    $scope.returnedClassImg = $scope.img;
+    return $scope.returnedClassImg;
+  }
+
+  //   $http.get('http://localhost:8080/classImg' + classId)
+  //   success.(function(data, status, headers, config) {
+  //       $scope.getClassImg = data;
+  //   })
+  //   .error(function(error, status, headers, config) {
+  //        console.log(status);
+  //        console.log("getClassImg error");
+  //   });
+}
+
 getClasses(2);
 
 Array.prototype.in_array = function(p_val) {
@@ -42,7 +61,6 @@ Array.prototype.in_array = function(p_val) {
 
 $scope.clickOnParent = function(clickedProdId){
   var parentsIds = [2,3,9,12];
-  console.log(clickedProdId);
   if (parentsIds.in_array(clickedProdId)){
         $rootScope.$broadcast("displayChildOrProd", {
         displayProds: false,
@@ -70,11 +88,18 @@ $scope.$on ("displayChildOrProd", function(event, args) {
     }
 });
 
-function getProds(classId){
-  $http.get('http://localhost:8080/getProds' + classId)
+function getProds(prodId){
+  $http.get('http://localhost:8080/getProds' + prodId)
     .success(function(data, status, headers, config) {
       $scope.prodsItems = data;
-      //console.log(data);
+      // var tmp = data;
+      // tmp.forEach(function(item,i,arr){
+      //   $http.get('http://localhost:8080/prodImg' + item[0].productID)
+      //   .then(function(response) {
+      //     arr[i][0]['productImage'] = response.data;
+      //   });
+      // });
+      // $scope.prodsItems = tmp;
     })
     .error(function(error, status, headers, config) {
       console.log(status);
@@ -85,8 +110,14 @@ function getProds(classId){
 function getClasses(classId){
   $http.get('http://localhost:8080/getClasses' + classId)
     .success(function(data, status, headers, config) {
-      $scope.items = data;
-      //console.log(data);
+      var tmp = data;
+      tmp.forEach(function(item,i,arr){
+        $http.get('http://localhost:8080/classImg' + item.ID_CLASS)
+        .then(function(response) {
+          arr[i]['IMAGE'] = response.data;
+        });
+      });
+      $scope.items = tmp;
     })
     .error(function(error, status, headers, config) {
       console.log(status);
@@ -112,17 +143,6 @@ function getParamsId(Id){
 // function countCols(obj){
 //   return Object.keys(obj).length;
 // };
-
-/* USE: getImgs(e.itemData);*/
-// function getImgs(arr){
-//   var imgs = [],
-//       prodsIds = [];
-//   arr.forEach(item, i, arr){
-//     prodsIds.push([item.OIDEL]);
-//   }
-
-//   imgs.push([{elId, img64}]);
-// }
 $scope.numberBox = {
   bindingOptions: {
     dataSource: 'prodsItems',
@@ -139,24 +159,14 @@ $scope.selectedItem = {
 }
 $scope.childs;
 
-//console.log($scope.prodsImg);
 $scope.dxListOptions = {
   bindingOptions: { 
     dataSource: 'prodsItems'
     },
     onItemRendered: function(e) {
-      // $scope.listImg = ProdImg(e.itemData.OIDEL);
-      // $scope.listClassName = e.itemData.ONAME;
-      // $scope.listPrice = e.itemData.OIDCLASS+10;
-
-      // e.itemElement.empty("");
-      // e.itemElement.append("<div class=\"img-wrap\"><img src=\"" + getProdImg(e.itemData.OIDEL) + "\"></div>");
-      // e.itemElement.append("<div class=\"listName\">" + e.itemData.ONAME + "<br>Категория: " + e.itemData.ONAMECLASS + "</div>");
-      // e.itemElement.append("<div class=\"listPrice\">Цена: " + e.itemData.OIDCLASS+100 + "</div>");
-      console.log(e.itemData);
       e.itemElement.empty("");
-      e.itemElement.append("<div class=\"img-wrap\"><img src=\"" + getProdImg(e.itemData.OIDEL) + "\"></div>");
-      e.itemElement.append("<div class=\"listName\">" + e.itemData.productName + "<br>Категория: " + e.itemData.productClassName + "</div>");
+      e.itemElement.append("<div class=\"img-wrap\"><img src=\"" + $scope.img + "\"></div>");
+      e.itemElement.append("<div class=\"listName\">" + e.itemData[0].productName + "<br>Категория: " + e.itemData[0].productClassName + "</div>");
       e.itemElement.append("<div class=\"listPrice\">Цена: " + 100 + "</div>");
   },
     onItemClick: function(e) {
@@ -166,8 +176,6 @@ $scope.dxListOptions = {
       //$scope.selectedItem.img = getProdImg(e.itemData.OIDEL);
     },
   paginate: true,
-utoPagingEnabled: true,
-  
   showReorderControls: true,
   showSelectionControls: true
 }

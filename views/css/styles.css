@@ -147,7 +147,10 @@ ul{
 .list .gridList li span {
     
 }
-
+.list a {
+    text-decoration: none;
+    color: inherit;
+}
 
 .clear{
     clear:left;
