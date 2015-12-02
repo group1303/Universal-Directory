@@ -3,50 +3,6 @@ angular.module('UniDir.content', ['ngRoute','dx'])
 .controller('contentCtrl', ['$scope','$http', '$rootScope', 
   function($scope, $http, $rootScope) {
 
-// $http.get('http://localhost:8080/classes')
-//   .success(function(data, status, headers, config) {
-//       $scope.items = data;
-//   })
-//   .error(function(error, status, headers, config) {
-//        console.log(status);
-//        console.log("Error data_content.js");
-// });
-
-function getProdImg (prodId){
-  if (prodId == undefined) {
-    console.log("getProdImg error");
-    $scope.returnedImg = $scope.img;
-    return $scope.returnedImg;
-  } else {
-    $http.get('http://localhost:8080/prodImg' + prodId)
-    .success(function(data, status, headers, config) {
-        $scope.returnedImg = data;
-        console.log($scope.returnedImg);
-    })
-    .error(function(error, status, headers, config) {
-         console.log(status);
-         console.log("getProdImg error");
-    });
-    return $scope.returnedImg;
-  }
-}
-
-function getClassImg (classId){
-  if (classId == undefined) {
-    console.log("getProdImg error");
-    $scope.returnedClassImg = $scope.img;
-    return $scope.returnedClassImg;
-  }
-
-  //   $http.get('http://localhost:8080/classImg' + classId)
-  //   success.(function(data, status, headers, config) {
-  //       $scope.getClassImg = data;
-  //   })
-  //   .error(function(error, status, headers, config) {
-  //        console.log(status);
-  //        console.log("getClassImg error");
-  //   });
-}
 
 getClasses(2);
 
@@ -83,23 +39,23 @@ $scope.$on ("displayChildOrProd", function(event, args) {
     $scope.displayProds = true;//display prods
     getProds(args.id);
 
-    getParamsId(args.id);
+    //getParamsId(args.id);
     //console.log("Now display prods",$scope.displayProds);
     }
 });
+
+function getClassImg (classId){
+  if (classId == undefined) {
+    console.log("getProdImg error");
+    $scope.returnedClassImg = $scope.img;
+    return $scope.returnedClassImg;
+  }
+}
 
 function getProds(prodId){
   $http.get('http://localhost:8080/getProds' + prodId)
     .success(function(data, status, headers, config) {
       $scope.prodsItems = data;
-      // var tmp = data;
-      // tmp.forEach(function(item,i,arr){
-      //   $http.get('http://localhost:8080/prodImg' + item[0].productID)
-      //   .then(function(response) {
-      //     arr[i][0]['productImage'] = response.data;
-      //   });
-      // });
-      // $scope.prodsItems = tmp;
     })
     .error(function(error, status, headers, config) {
       console.log(status);
@@ -124,17 +80,7 @@ function getClasses(classId){
       console.log("getClasses error");
     });
 };
-function getParamsId(Id){
-  $http.get('http://localhost:8080/pars' + Id)
-      .success(function(data, status, headers, config) {
-        $scope.paramsItems = data;
-        //console.log(data);
-      })
-      .error(function(error, status, headers, config) {
-        console.log(status);
-        console.log("getClasses error");
-      });
-}
+
 // $scope.dx-toast = {
 
 // }
@@ -164,10 +110,11 @@ $scope.dxListOptions = {
     dataSource: 'prodsItems'
     },
     onItemRendered: function(e) {
+      console.log(e.itemData[0]);
       e.itemElement.empty("");
-      e.itemElement.append("<div class=\"img-wrap\"><img src=\"" + $scope.img + "\"></div>");
+      e.itemElement.append("<div class=\"img-wrap\"><img src=\"" + e.itemData[0].productImage + "\"></div>");
       e.itemElement.append("<div class=\"listName\">" + e.itemData[0].productName + "<br>Категория: " + e.itemData[0].productClassName + "</div>");
-      e.itemElement.append("<div class=\"listPrice\">Цена: " + 100 + "</div>");
+      e.itemElement.append("<div class=\"listPrice\">Цена: " + e.itemData[0].productID+100 + "</div>");
   },
     onItemClick: function(e) {
       //$scope.selectedItem.name = e.itemData.ONAME;
