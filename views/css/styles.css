@@ -168,6 +168,7 @@ ul{
     margin-left: 30px;
     margin-top: 5px;
     float: left;
+    width: 50%;
 }
 
 .about span{
@@ -178,6 +179,7 @@ ul{
     float: left;
     margin-left: 30px;
     margin-top: 30px;
+    width: 50%;
 }
 
 
