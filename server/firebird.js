@@ -234,7 +234,7 @@ module.exports = {
 					  database = db;
 					  database.query(qrystr, function (err, res){
 					  	//console.log(res);
-							res[0].image(function(err,name,e){
+							res[0].IMAGE(function(err,name,e){
 								if (err) throw err;
 
 								var pId = res[0].id;

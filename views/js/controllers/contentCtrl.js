@@ -44,14 +44,6 @@ $scope.$on ("displayChildOrProd", function(event, args) {
     }
 });
 
-function getClassImg (classId){
-  if (classId == undefined) {
-    console.log("getProdImg error");
-    $scope.returnedClassImg = $scope.img;
-    return $scope.returnedClassImg;
-  }
-}
-
 function getProds(prodId){
   $http.get('http://localhost:8080/getProds' + prodId)
     .success(function(data, status, headers, config) {
