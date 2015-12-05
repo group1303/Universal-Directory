@@ -1,6 +1,6 @@
 angular.module('UniDir.content', ['ngRoute','dx'])
 
-.controller('contentCtrl', ['$scope','$http', '$rootScope', 
+.controller('contentCtrl', ['$scope','$http', '$rootScope',
   function($scope, $http, $rootScope) {
 
 
@@ -15,17 +15,17 @@ Array.prototype.in_array = function(p_val) {
   return false;
 }
 
-$scope.clickOnParent = function(clickedProdId){
+$scope.clickOnParent = function(clickedItemId){
   var parentsIds = [2,3,9,12];
-  if (parentsIds.in_array(clickedProdId)){
+  if (parentsIds.in_array(clickedItemId)){
         $rootScope.$broadcast("displayChildOrProd", {
         displayProds: false,
-        id: clickedProdId
+        id: clickedItemId
       })
       } else {
         $rootScope.$broadcast("displayChildOrProd", {
         displayProds: true,
-        id: clickedProdId
+        id: clickedItemId
       })
 }
 }
@@ -89,14 +89,7 @@ function getClasses(classId){
 // function countCols(obj){
 //   return Object.keys(obj).length;
 // };
-$scope.numberBox = {
-  bindingOptions: {
-    dataSource: 'prodsItems',
-    value: 'prodsItems.productName'
-  },
-  showSpinButtons: true,
-  showClearButton: true
-}
+
 $scope.selectedItem = {
   name: '',
   className: '',
