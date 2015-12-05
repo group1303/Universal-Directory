@@ -234,7 +234,7 @@ module.exports = {
 					  database = db;
 					  database.query(qrystr, function (err, res){
 					  	//console.log(res);
-							res[0].IMAGE(function(err,name,e){
+							res[0].image(function(err,name,e){
 								if (err) throw err;
 
 								var pId = res[0].id;
@@ -254,37 +254,6 @@ module.exports = {
 				  }
 				});
 			},
-					  
-	// queryBLOB: function(qrystr, callback){
-	//   var CFG = LoadConfig(),
-	//     blobData = [],
-	//     counter = 0,
-	//     base64 = '',
-	//     tmpId = 0;
-	//   fb.attachOrCreate({host: CFG.host, database: CFG.database, user: CFG.user, password: CFG.password},
-	//     function (err, db) {
-	//       if (err) {
-	//         return callback(err.message);
-	//       } else {
-	//         database = db;
-	//         database.query(qrystr, function (err, res){
-	//           //console.log(res);
-	//           res[0].image(function(err,name,e){
-	//             //console.log(e.on);
-	//             e.on('data', function(chunk){
-	//               base64 += chunk;
-	//             });
-	//             e.on('end', function (){
-	//               var buff = new Buffer(base64, 'binary').toString('utf8');
-	//               callback(buff);
-	//               db.detach();
-	//             });
-	//           });
-	//         });
-	//       }
-	//     }
-	//   );
-	// },
 
 	transactionDB: function(qrystr,callback){
 	  var CFG = LoadConfig(),
